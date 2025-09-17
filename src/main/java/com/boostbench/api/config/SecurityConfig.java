@@ -65,6 +65,7 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.addAllowedOrigin("http://localhost:3000"); // Allow React app origin
+        configuration.addAllowedOrigin("http://localhost:3001"); // Allow React app origin
         configuration.addAllowedOrigin("https://0844fe44a55e.ngrok-free.app");
         configuration.addAllowedMethod("*"); // Allow all HTTP methods (GET, POST, OPTIONS, etc.)
         configuration.addAllowedHeader("*"); // Allow all headers
