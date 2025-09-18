@@ -127,6 +127,24 @@ public class OrderServiceImpl implements OrderService {
         if (paymentStatus == PaymentStatus.PAID) {
             order.setPaymentCompletedAt(LocalDateTime.now());
             order.setStatus(OrderStatus.CONFIRMED);
+
+            // Update product quantities
+            for (OrderItem orderItem : order.getItems()) {
+                Product product = orderItem.getProduct();
+                int orderedQuantity = orderItem.getQuantity();
+
+                // Update availableQuantity and soldQuantity
+                product.setAvailableQuantity(product.getAvailableQuantity() - orderedQuantity);
+                product.setSoldQuantity(product.getSoldQuantity() + orderedQuantity);
+
+                // Validate available quantity
+                if (product.getAvailableQuantity() < 0) {
+                    throw new IllegalStateException("Insufficient stock for product: " + product.getName());
+                }
+
+                // Save the updated product
+                productRepository.save(product);
+            }
         }
 
         Order updatedOrder = orderRepository.save(order);

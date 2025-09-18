@@ -79,7 +79,7 @@ public class PaymentService {
                 .returnUrl(payHereConfig.getFrontendUrl() + "/payment/success")
                 .cancelUrl(payHereConfig.getFrontendUrl() + "/payment/cancel")
 //                .notifyUrl(payHereConfig.getBackendUrl() + "/api/payments/notify")
-                .notifyUrl("https://0844fe44a55e.ngrok-free.app/api/payments/notify")
+                .notifyUrl(payHereConfig.getNotifyUrl() + "/api/payments/notify")
                 .sandbox(payHereConfig.isSandbox())
                 .items(items.length() > 100 ? items.substring(0, 97) + "..." : items)
                 .build();

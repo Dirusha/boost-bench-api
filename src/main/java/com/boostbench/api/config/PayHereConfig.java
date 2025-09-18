@@ -23,6 +23,9 @@ public class PayHereConfig {
     @Value("${payhere.production.url:https://www.payhere.lk/pay/checkout}")
     private String productionUrl;
 
+    @Value("${payhere.notify.url}")
+    private String notifyUrl;
+
     @Value("${app.frontend.url}")
     private String frontendUrl;
 
